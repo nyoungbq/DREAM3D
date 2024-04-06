@@ -1,3 +1,9 @@
+---
+hide:
+  - navigation
+  - toc
+---
+
 ## Prebuilt Binaries ##
 
 The current version is 6.5.171 and is available in prebuilt binaries for MacOS, Windows and Linux operating systems:

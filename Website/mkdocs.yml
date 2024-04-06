@@ -1,11 +1,27 @@
-site_name: DREAM3D
+site_name: DREAM.3D Version 6
+
 theme:
   name: 'material'
+  custom_dir: overrides
+
   palette:
     primary: light-blue
     accent: light-blue
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch   
+    - header.autohide
+    - announce.dismiss
+    - navigation.footer
+    - navigation.tabs    
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.path
+    - navigation.prune 
+  icon:
+    annotation: material/arrow-right-circle
 
-site_url: http://dream3d.bluequartz.net
+site_url: https://dream3d.bluequartz.net
 
 nav:
     - Home: 'index.md'
@@ -17,7 +33,6 @@ nav:
     - DREAM3D In Use: 'DREAM3D_in_Use.md'
     - Origins of DREAM3D: 'Origins.md'
     
-
 docs_dir: docs
 site_dir: 'dream3d-wp.bluequartz.net'
 
@@ -28,11 +43,33 @@ markdown_extensions:
       guess_lang: false
   - toc:
       permalink: true
+  - attr_list
+  - md_in_html
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 extra:
   palette:
     primary: 'blue'
     accent: 'bluegrey'
+  consent:
+    title: Cookie consent
+    description: >- 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
 
 extra_css:
   - 'assets/stylesheets/extra.css'
+
+extra:
+  social:
+    - icon: fontawesome/brands/linkedin 
+      link: https://www.linkedin.com/company/15381665/admin/feed/posts/
+      name: BlueQuartz Software on LinkedIn
+    - icon: fontawesome/brands/github 
+      link: https://www.github.com/bluequartzsoftware
+      name: BlueQuartz Software on GitHub

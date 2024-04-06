@@ -1,3 +1,9 @@
+---
+hide:
+  - navigation
+  - toc
+---
+
 ## DREAM.3D License ##
 
 Copyright (c) 2009-2022 BlueQuartz Software, LLC

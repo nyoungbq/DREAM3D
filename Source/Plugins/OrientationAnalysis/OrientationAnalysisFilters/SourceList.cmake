@@ -46,7 +46,6 @@ set(_PublicFilters
   FindTwinBoundaries
   FindTwinBoundarySchmidFactors
   GenerateFaceIPFColoring
-  GenerateFaceMisorientationColoring
   GenerateFZQuaternions
   GenerateIPFColors
   GenerateOrientationMatrixTranspose
@@ -87,7 +86,6 @@ endforeach()
 # This is the list of Private Filters. These filters are available from other filters but the user will not
 # be able to use them from the DREAM3D user interface.
 set(_PrivateFilters
-  GenerateFaceSchuhMisorientationColoring
   FindBasalLoadingFactor
 
   FindLocalAverageCAxisMisalignments

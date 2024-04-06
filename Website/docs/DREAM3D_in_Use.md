@@ -1,3 +1,9 @@
+---
+hide:
+  - navigation
+  - toc
+---
+
 ## Papers Citing DREAM3D ##
 
 [1](http://stacks.iop.org/0965-0393/20/i=7/a=075005) S D Sintay and A D Rollett. Testing the accuracy of microstructure reconstruction in three dimensions using phantoms. Modelling and Simulation in Materials Science and Engineering, 20(7):075005, 2012. 

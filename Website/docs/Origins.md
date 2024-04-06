@@ -1,3 +1,9 @@
+---
+hide:
+  - navigation
+  - toc
+---
+
 ## Publications That Describe Algorithms Contained In DREAM3D ##
 
 [1] S. P. Donegan, J. C. Tucker, A. D. Rollett, K. Barmak, and M. Groeber. Extreme value analysis of tail departure from log-normality in experimental and simulated grain size distributions. Acta materialia, 61(15):5595-5604, 2013.

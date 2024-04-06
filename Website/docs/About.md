@@ -1,3 +1,9 @@
+---
+hide:
+  - navigation
+  - toc
+---
+
 ## History ##
 
 The history of DREAM.3D is rooted in two parallel research efforts:
