@@ -360,7 +360,7 @@ void MatchCrystallography::execute()
     if(m_PhaseTypes[i] == static_cast<PhaseType::EnumType>(PhaseType::Type::Primary) || m_PhaseTypes[i] == static_cast<PhaseType::EnumType>(PhaseType::Type::Precipitate))
     {
       ss = QObject::tr("Initializing Arrays of Phase %1").arg(i);
-      notifyStatusMessage("Initializing Arrays");
+      notifyStatusMessage(ss);
       initializeArrays(i);
       if(getErrorCode() < 0)
       {
@@ -511,10 +511,9 @@ void MatchCrystallography::determine_boundary_areas()
 
   m_TotalSurfaceArea.assign(totalEnsembles, 0.0f);
 
-  int32_t phase1 = 0, phase2 = 0;
   for(size_t i = 1; i < totalFeatures; i++)
   {
-    phase1 = m_FeaturePhases[i];
+    int32_t phase1 = m_FeaturePhases[i];
     size_t size = 0;
     if(!neighborlist[i].empty() && neighborsurfacearealist[i].size() == neighborlist[i].size())
     {
@@ -525,7 +524,7 @@ void MatchCrystallography::determine_boundary_areas()
     {
       int32_t nname = neighborlist[i][j];
       float neighsurfarea = neighborsurfacearealist[i][j];
-      phase2 = m_FeaturePhases[nname];
+      int32_t phase2 = m_FeaturePhases[nname];
       if(phase1 == phase2)
       {
         m_TotalSurfaceArea[phase1] = m_TotalSurfaceArea[phase1] + neighsurfarea;
@@ -567,7 +566,7 @@ void MatchCrystallography::assign_eulers(size_t ensem)
       // was used, so we bail
       if(numbins == 0)
       {
-        QString ss = QObject::tr("Unkown crystal structure (%1) for phase %2").arg(m_CrystalStructures[phase]).arg(phase);
+        QString ss = QObject::tr("Unknown crystal structure (%1) for phase %2").arg(m_CrystalStructures[phase]).arg(phase);
         setErrorCondition(-666, ss);
         return;
       }
@@ -724,10 +723,9 @@ void MatchCrystallography::matchCrystallography(size_t ensem)
   size_t counter = 0;
 
   QuatF q1;
-  QuatF q2;
-  //  QuatF* avgQuats = reinterpret_cast<QuatF*>(m_AvgQuats);
+  //QuatF q2;
 
-  float ea1 = 0.0f, ea2 = 0.0f, ea3 = 0.0f;
+  // float ea1 = 0.0f, ea2 = 0.0f, ea3 = 0.0f;
   float g1ea1 = 0.0f, g1ea2 = 0.0f, g1ea3 = 0.0f, g2ea1 = 0.0f, g2ea2 = 0.0f, g2ea3 = 0.0f;
   int32_t g1odfbin = 0, g2odfbin = 0;
   float deltaerror = 0.0f;
@@ -743,7 +741,6 @@ void MatchCrystallography::matchCrystallography(size_t ensem)
 
   uint64_t millis = QDateTime::currentMSecsSinceEpoch();
   uint64_t startMillis = millis;
-  int32_t lastIteration = 0;
   while(badtrycount < (m_MaxIterations / 10) && iterations < m_MaxIterations)
   {
     uint64_t currentMillis = QDateTime::currentMSecsSinceEpoch();
@@ -757,7 +754,6 @@ void MatchCrystallography::matchCrystallography(size_t ensem)
       notifyStatusMessage(ss);
 
       millis = QDateTime::currentMSecsSinceEpoch();
-      lastIteration = iterations;
     }
     currentodferror = 0;
     currentmdferror = 0;
@@ -809,11 +805,9 @@ void MatchCrystallography::matchCrystallography(size_t ensem)
       }
       else
       {
-        ea1 = m_FeatureEulerAngles[3 * selectedfeature1];
-        ea2 = m_FeatureEulerAngles[3 * selectedfeature1 + 1];
-        ea3 = m_FeatureEulerAngles[3 * selectedfeature1 + 2];
+        // Create a reusable Rodrigues Vector
         OrientationD rod(4, 0.0);
-
+        // Pack the Orientation Wrapper with the current Euler Angle
         OrientationD eu(m_FeatureEulerAngles[3 * selectedfeature1], m_FeatureEulerAngles[3 * selectedfeature1 + 1], m_FeatureEulerAngles[3 * selectedfeature1 + 2]);
         rod = OrientationTransformation::eu2ro<OrientationD, OrientationD>(eu);
 
@@ -849,7 +843,7 @@ void MatchCrystallography::matchCrystallography(size_t ensem)
           int32_t neighbor = neighborlist[selectedfeature1][j];
           eu = OrientationD(m_FeatureEulerAngles[3 * neighbor], m_FeatureEulerAngles[3 * neighbor + 1], m_FeatureEulerAngles[3 * neighbor + 2]);
 
-          q2 = OrientationTransformation::eu2qu<OrientationD, QuatF>(eu);
+          QuatF q2 = OrientationTransformation::eu2qu<OrientationD, QuatF>(eu);
           float neighsurfarea = neighborsurfacearealist[selectedfeature1][j];
           MC_LoopBody1(selectedfeature1, ensem, j, neighsurfarea, q1, q2, laueOp.get());
         }
@@ -874,7 +868,7 @@ void MatchCrystallography::matchCrystallography(size_t ensem)
             int neighbor = neighborlist[selectedfeature1][j];
             eu = OrientationD(m_FeatureEulerAngles[3 * neighbor], m_FeatureEulerAngles[3 * neighbor + 1], m_FeatureEulerAngles[3 * neighbor + 2]);
 
-            q2 = OrientationTransformation::eu2qu<OrientationD, QuatF>(eu);
+            QuatF q2 = OrientationTransformation::eu2qu<OrientationD, QuatF>(eu);
             float neighsurfarea = neighborsurfacearealist[selectedfeature1][j];
             MC_LoopBody2(selectedfeature1, ensem, j, neighsurfarea, q1, q2, laueOp.get());
           }
@@ -1029,10 +1023,10 @@ void MatchCrystallography::matchCrystallography(size_t ensem)
             for(size_t j = 0; j < size; j++)
             {
               size_t neighbor = neighborlist[selectedfeature1][j];
-              ea1 = m_FeatureEulerAngles[3 * neighbor];
-              ea2 = m_FeatureEulerAngles[3 * neighbor + 1];
-              ea3 = m_FeatureEulerAngles[3 * neighbor + 2];
-              q2 = OrientationTransformation::eu2qu<OrientationD, QuatF>(OrientationD(ea1, ea2, ea3));
+              float ea1 = m_FeatureEulerAngles[3 * neighbor];
+              float ea2 = m_FeatureEulerAngles[3 * neighbor + 1];
+              float ea3 = m_FeatureEulerAngles[3 * neighbor + 2];
+              QuatF q2 = OrientationTransformation::eu2qu<OrientationD, QuatF>(OrientationD(ea1, ea2, ea3));
               float neighsurfarea = neighborsurfacearealist[selectedfeature1][j];
               if(neighbor != selectedfeature2)
               {
@@ -1050,10 +1044,10 @@ void MatchCrystallography::matchCrystallography(size_t ensem)
             for(size_t j = 0; j < size; j++)
             {
               size_t neighbor = neighborlist[selectedfeature2][j];
-              ea1 = m_FeatureEulerAngles[3 * neighbor];
-              ea2 = m_FeatureEulerAngles[3 * neighbor + 1];
-              ea3 = m_FeatureEulerAngles[3 * neighbor + 2];
-              q2 = OrientationTransformation::eu2qu<OrientationD, QuatF>(OrientationD(ea1, ea2, ea3));
+              float ea1 = m_FeatureEulerAngles[3 * neighbor];
+              float ea2 = m_FeatureEulerAngles[3 * neighbor + 1];
+              float ea3 = m_FeatureEulerAngles[3 * neighbor + 2];
+              QuatF q2 = OrientationTransformation::eu2qu<OrientationD, QuatF>(OrientationD(ea1, ea2, ea3));
               float neighsurfarea = neighborsurfacearealist[selectedfeature2][j];
               if(neighbor != selectedfeature1)
               {
@@ -1075,6 +1069,16 @@ void MatchCrystallography::matchCrystallography(size_t ensem)
     return;
   }
 
+  // Ensure the Average Quats are updated correctly as the Eulers could have been changed.
+  for(size_t i = 0; i < totalFeatures; i++)
+  {
+    float* currentAvgQuatPtr = m_AvgQuats + i * 4;
+    OrientationF eu(m_FeatureEulerAngles[3 * i], m_FeatureEulerAngles[3 * i + 1], m_FeatureEulerAngles[3 * i + 2]);
+    QuatF q = OrientationTransformation::eu2qu<OrientationF, QuatF>(eu);
+    q.copyInto(currentAvgQuatPtr, QuatF::Order::VectorScalar);
+  }
+
+  // Place the Euler Values on the cell data
   for(size_t i = 0; i < totalPoints; i++)
   {
     m_CellEulerAngles[3 * i] = m_FeatureEulerAngles[3 * m_FeatureIds[i]];
