@@ -4,6 +4,10 @@ hide:
   - toc
 ---
 
+## Known Issues ##
+
+- Match Crystallography: The Average Quaternions that are generated may not be correct. As a work around, use the "Delete Data" filter to remove the FeatureData / Average Quaternions and then regenerate them by using the "Convert Orientation Representation" filter to convert the Average Euler Angles to Quaternions.
+
 ## Version 6.5.171 Release Notes ##
 
 These release notes summarize the major changes for each officially released version of DREAM.3D. The official bug report is located at the [DREAM.3D GitHub issues page](https://github.com/bluequartzsoftware/DREAM3D/issues).

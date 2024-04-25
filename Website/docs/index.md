@@ -65,6 +65,8 @@ The nightly version is 6.6.xxx and is available in prebuilt binaries for MacOS, 
 
 ## Python Anaconda Distribution
 
+THIS IS NOW DEPRECATED AND NO LONGER UPDATED. [Please update to the latest DREAM3D-NX release](https://www.dream3d.io/python_docs)
+
 ```lang-console
 (base) C:\Users\johnsmith> conda config --add channels conda-forge
 (base) C:\Users\johnsmith> conda config --set channel_priority strict
@@ -77,7 +79,7 @@ The nightly version is 6.6.xxx and is available in prebuilt binaries for MacOS, 
 
 ## Documentation
 
-+ The HTML documentation is located [here](http://www.dream3d.io) and also available within the application itself.
++ The HTML documentation is located [here](https://dream3d.bluequartz.net/Help) and also available within the application itself.
 + BlueQuartz maintains a [YouTube Channel that has some instructional videos](https://www.youtube.com/channel/UCjeF8pFMzET5ZN3vsBHATpg)
 
 ## Discussion Group
