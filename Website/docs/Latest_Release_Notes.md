@@ -7,6 +7,7 @@ hide:
 ## Known Issues ##
 
 - Match Crystallography: The Average Quaternions that are generated may not be correct. As a work around, use the "Delete Data" filter to remove the FeatureData / Average Quaternions and then regenerate them by using the "Convert Orientation Representation" filter to convert the Average Euler Angles to Quaternions.
+- Read Oxford Instruments CTF File: There is an issue where the phase data values will be incremented from 0 to 1 under certain conditions. The workaround is to first convert the data to an H5EBSD file, then read the data from the H5EBSD file in DREAM.3D.
 
 ## Version 6.5.171 Release Notes ##
 

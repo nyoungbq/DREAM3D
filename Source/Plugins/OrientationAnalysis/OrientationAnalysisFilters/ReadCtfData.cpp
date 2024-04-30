@@ -515,24 +515,7 @@ void ReadCtfData::copyRawEbsdData(CtfReader* reader, std::vector<size_t>& tDims,
   tDims[2] = m->getGeometryAs<ImageGeom>()->getZPoints();
   ebsdAttrMat->resizeAttributeArrays(tDims);
   {
-    /* Take from H5CtfVolumeReader.cpp
-     * For HKL OIM Files if there is a single phase then the value of the phase
-     * data is one (1). If there are 2 or more phases then the lowest value
-     * of phase is also one (1). However, if there are "zero solutions" in the data
-     * then those points are assigned a phase of zero.  Since those points can be identified
-     * by other methods, the phase of these points should be changed to one since in the rest
-     * of the reconstruction code we follow the convention that the lowest value is One (1)
-     * even if there is only a single phase. The next if statement converts all zeros to ones
-     * if there is a single phase in the OIM data.
-     */
     phasePtr = reinterpret_cast<int32_t*>(reader->getPointerByName(EbsdLib::Ctf::Phase));
-    for(size_t i = 0; i < totalPoints; i++)
-    {
-      if(phasePtr[i] < 1)
-      {
-        phasePtr[i] = 1;
-      }
-    }
     iArray = Int32ArrayType::CreateArray(totalPoints, SIMPL::CellData::Phases, true);
     ::memcpy(iArray->getPointer(0), phasePtr, sizeof(int32_t) * totalPoints);
     ebsdAttrMat->insertOrAssign(iArray);
