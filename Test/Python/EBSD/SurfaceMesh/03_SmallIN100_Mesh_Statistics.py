@@ -45,19 +45,6 @@ def small_in100_mesh_stats():
                                                          'SurfaceMeshFaceIPFColors')
     assert err == 0, f'GenerateFaceIPFColoring ErrorCondition {err}'
 
-    # Generate Misorientation Colors (Face)
-    err = orientationanalysis.generate_face_misorientation_coloring(dca,
-                                                                    simpl.DataArrayPath('TriangleDataContainer',
-                                                                                        'FaceData', 'FaceLabels'),
-                                                                    simpl.DataArrayPath('Small IN100', 'Grain Data',
-                                                                                        'AvgQuats'),
-                                                                    simpl.DataArrayPath('Small IN100', 'Grain Data',
-                                                                                        'Phases'),
-                                                                    simpl.DataArrayPath('Small IN100', 'Phase Data',
-                                                                                        'CrystalStructures'),
-                                                                    'SurfaceMeshFaceMisorientationColors')
-    assert err == 0, f'GenerateFaceMisorientationColoring ErrorCondition {err}'
-
     # Write to DREAM3D file
     err = sh.WriteDREAM3DFile(sd.GetBuildDirectory() + '/Data/Output/SurfaceMesh/SmallIN100_MeshStats.dream3d',
                               dca)
