@@ -1642,7 +1642,7 @@ void InsertPrecipitatePhases::generate_precipitate(int32_t phase, Precip_t* prec
   precip->m_AxisEulerAngles[1] = eulers[1];
   precip->m_AxisEulerAngles[2] = eulers[2];
   precip->m_Omega3s = omega3f;
-  precip->m_FeaturePhases = phase + m_FirstPrecipitateFeature;
+  precip->m_FeaturePhases = phase;
 }
 
 // -----------------------------------------------------------------------------
