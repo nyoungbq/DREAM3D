@@ -48,6 +48,7 @@
 #include "EbsdLib/Core/OrientationTransformation.hpp"
 #include "EbsdLib/Core/Quaternion.hpp"
 #include "EbsdLib/LaueOps/LaueOps.h"
+#include "EbsdLib/EbsdLibVersion.h"
 
 #include "OrientationAnalysis/OrientationAnalysisConstants.h"
 #include "OrientationAnalysis/OrientationAnalysisVersion.h"
@@ -216,7 +217,7 @@ void FindSlipTransmissionMetrics::execute()
   {
     return;
   }
-  std::vector<LaueOps::Pointer> m_OrientationOps = LaueOps::GetAllOrientationOps();
+  std::vector<LaueOps::Pointer> orientationOps = LaueOps::GetAllOrientationOps();
 
   size_t totalFeatures = m_FeaturePhasesPtr.lock()->getNumberOfTuples();
 
@@ -224,57 +225,50 @@ void FindSlipTransmissionMetrics::execute()
   // reference variable to the pointer with the correct variable name that allows
   // us to use the same syntax as the "vector of vectors"
   NeighborList<int32_t>& neighborlist = *(m_NeighborList.lock());
-
-  std::vector<std::vector<float>> F1lists;
-  std::vector<std::vector<float>> F1sptlists;
-  std::vector<std::vector<float>> F7lists;
-  std::vector<std::vector<float>> mPrimelists;
-
-  double mprime = 0.0, F1 = 0.0, F1spt = 0.0, F7 = 0.0;
-  int32_t nname;
-
-  // QuatF* avgQuats = reinterpret_cast<QuatF*>(m_AvgQuats);
   FloatArrayType::Pointer avgQuatPtr = m_AvgQuatsPtr.lock();
+
+  std::vector<std::vector<float32>> F1Lists(totalFeatures);
+  std::vector<std::vector<float32>> F1sPtLists(totalFeatures);
+  std::vector<std::vector<float32>> F7Lists(totalFeatures);
+  std::vector<std::vector<float32>> mPrimeLists(totalFeatures);
 
   double LD[3] = {0.0f, 0.0f, 1.0f};
 
-  F1lists.resize(totalFeatures);
-  F1sptlists.resize(totalFeatures);
-  F7lists.resize(totalFeatures);
-  mPrimelists.resize(totalFeatures);
-
+  int32_t nName;
+  float32 mPrime, F1, F1sPt, F7;
   for(size_t i = 1; i < totalFeatures; i++)
   {
-    F1lists[i].assign(neighborlist[i].size(), 0.0f);
-    F1sptlists[i].assign(neighborlist[i].size(), 0.0f);
-    F7lists[i].assign(neighborlist[i].size(), 0.0f);
-    mPrimelists[i].assign(neighborlist[i].size(), 0.0f);
-    for(size_t j = 0; j < neighborlist[i].size(); j++)
+    size_t listLength = neighborlist[i].size();
+    F1Lists[i].assign(listLength, 0.0f);
+    F1sPtLists[i].assign(listLength, 0.0f);
+    F7Lists[i].assign(listLength, 0.0f);
+    mPrimeLists[i].assign(listLength, 0.0f);
+    for(size_t j = 0; j < listLength; j++)
     {
-      nname = neighborlist[i][j];
+      nName = neighborlist[i][j];
       float* avgQuat = m_AvgQuats + i * 4;
       QuatD q1(avgQuat[0], avgQuat[1], avgQuat[2], avgQuat[3]);
-      avgQuat = m_AvgQuats + nname * 4;
+      avgQuat = m_AvgQuats + nName * 4;
       QuatD q2(avgQuat[0], avgQuat[1], avgQuat[2], avgQuat[3]);
 
-      if(m_CrystalStructures[m_FeaturePhases[i]] == m_CrystalStructures[m_FeaturePhases[nname]] && m_FeaturePhases[i] > 0)
+      if(m_CrystalStructures[m_FeaturePhases[i]] == m_CrystalStructures[m_FeaturePhases[nName]] && m_FeaturePhases[i] > 0)
       {
-        mprime = m_OrientationOps[m_CrystalStructures[m_FeaturePhases[i]]]->getmPrime(q1, q2, LD);
-        F1 = m_OrientationOps[m_CrystalStructures[m_FeaturePhases[i]]]->getF1(q1, q2, LD, true);
-        F1spt = m_OrientationOps[m_CrystalStructures[m_FeaturePhases[i]]]->getF1spt(q1, q2, LD, true);
-        F7 = m_OrientationOps[m_CrystalStructures[m_FeaturePhases[i]]]->getF7(q1, q2, LD, true);
+        mPrime = static_cast<float32>(orientationOps[m_CrystalStructures[m_FeaturePhases[i]]]->getmPrime(q1, q2, LD));
+        F1 = static_cast<float32>(orientationOps[m_CrystalStructures[m_FeaturePhases[i]]]->getF1(q1, q2, LD, true));
+        F1sPt = static_cast<float32>(orientationOps[m_CrystalStructures[m_FeaturePhases[i]]]->getF1spt(q1, q2, LD, true));
+        F7 = static_cast<float32>(orientationOps[m_CrystalStructures[m_FeaturePhases[i]]]->getF7(q1, q2, LD, true));
       }
       else
       {
-        mprime = 0.0f;
+        mPrime = 0.0f;
         F1 = 0.0f;
-        F1spt = 0.0f;
+        F1sPt = 0.0f;
         F7 = 0.0f;
       }
-      mPrimelists[i][j] = mprime;
-      F1lists[i][j] = F1;
-      F1sptlists[i][j] = F1spt;
-      F7lists[i][j] = F7;
+      mPrimeLists[i][j] = mPrime;
+      F1Lists[i][j] = F1;
+      F1sPtLists[i][j] = F1sPt;
+      F7Lists[i][j] = F7;
     }
   }
 
@@ -282,22 +276,22 @@ void FindSlipTransmissionMetrics::execute()
   {
     // Set the vector for each list into the NeighborList Object
     NeighborList<float>::SharedVectorType f1L(new std::vector<float>);
-    f1L->assign(F1lists[i].begin(), F1lists[i].end());
+    f1L->assign(F1Lists[i].begin(), F1Lists[i].end());
     m_F1List.lock()->setList(static_cast<int32_t>(i), f1L);
 
     // Set the vector for each list into the NeighborList Object
     NeighborList<float>::SharedVectorType f1sptL(new std::vector<float>);
-    f1sptL->assign(F1sptlists[i].begin(), F1sptlists[i].end());
+    f1sptL->assign(F1sPtLists[i].begin(), F1sPtLists[i].end());
     m_F1sptList.lock()->setList(static_cast<int32_t>(i), f1sptL);
 
     // Set the vector for each list into the NeighborList Object
     NeighborList<float>::SharedVectorType f7L(new std::vector<float>);
-    f7L->assign(F7lists[i].begin(), F7lists[i].end());
+    f7L->assign(F7Lists[i].begin(), F7Lists[i].end());
     m_F7List.lock()->setList(static_cast<int32_t>(i), f7L);
 
     // Set the vector for each list into the NeighborList Object
     NeighborList<float>::SharedVectorType mPrimeL(new std::vector<float>);
-    mPrimeL->assign(mPrimelists[i].begin(), mPrimelists[i].end());
+    mPrimeL->assign(mPrimeLists[i].begin(), mPrimeLists[i].end());
     m_mPrimeList.lock()->setList(static_cast<int32_t>(i), mPrimeL);
   }
 }
