@@ -11,6 +11,18 @@ This **Filter** removes **Features** that have a total number of **Cells** below
 
 The **Filter** can be run in a mode where the minimum number of neighbors is applied to a single **Ensemble**.  The user can select to apply the minimum to one specific **Ensemble**.
 
+## Warning: Cell Level Data Will Be Changed
+
+Cells that are part of features that are smaller than the minimum size threshold will have their DataArray values **replaced** with values from neighboring cells that are within a valid feature, i.e., features that are removed have their cell level data replaced with neighboring larger features.
+
+## WARNING: Feature Data Will Become Invalid
+
+By modifying the cell level data, any feature data that was previously computed will most likely be invalid at this point. Filters such as "Find Sizes", "Find Shapes" should be re-run if you want accurate final results from your pipeline.
+
+## WARNING: NeighborList Removal
+
+If the Cell Feature AttributeMatrix contains any *NeighborList* data arrays, those arrays will be **REMOVED** because those lists are now invalid. Re-run the *Find Neighbors* filter to re-create the lists.
+
 ## Notes ##
 
 If any features are removed **and** the Cell Feature AttributeMatrix contains any _NeighborList_ data arrays those arrays will be **REMOVED** because those lists are now invalid. Re-run the _Find Neighbors_ filter to re-create the lists.
