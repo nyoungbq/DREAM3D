@@ -4,10 +4,9 @@ hide:
   - toc
 ---
 
-![DREAM.3DLogo](images/branded_splash.png)
-
-
 ## IMPORTANT NOTE
+
+![DREAM3D-NX Logo](images/NX_Banner_Logo.png)
 
 DREAM.3D Version 6 is considered legacy and all development has stopped. Please consider using DREAM3D-NX which can be downloaded from [https://www.dream3d.io](https://www.dream3d.io). DREAM3D-NX offers a much better user experience with its [integrated visualization](https://www.dream3d.io/FeatureGallery/) among its new features.
 
@@ -26,7 +25,9 @@ DREAM.3D Version 6 is considered legacy and all development has stopped. Please 
 
 </div>
 
-## DREAM.3D Version 6.x
+## DREAM.3D Version 6.5.171
+
+![DREAM.3DLogo](images/branded_splash.png)
 
 DREAM.3D consists of data analysis tools (Filters) that allow for the construction of customized workflows (Pipelines) to analyze data. DREAM.3D provides a flexible and extensible data structure that eases data transport between collaborators by storing data in a non-proprietary format.
 
@@ -46,6 +47,9 @@ DREAM.3D is completely open source and free for anyone to use whether that is in
 
 ## Prebuilt Binaries
 
+This version is legacy and will not be updated or supported past JAN 1 2024. If you need support for this
+version of DREAM.3D please consider a paid support contract with [BlueQuartz Software](https://www.bluequartz.net)
+
 The current version is 6.5.171 and is available in prebuilt binaries for MacOS, Windows and Linux operating systems:
 
 | Operating System | Notes |
@@ -59,9 +63,7 @@ The current version is 6.5.171 and is available in prebuilt binaries for MacOS, 
 
 ## Nightly Builds
 
-The nightly version is 6.6.xxx and is available in prebuilt binaries for MacOS, Windows and Linux operating systems:
-
-[Start Here and look for todays date or the latest available date.](https://dream3d.bluequartz.net/binaries/experimental)
+The nightly builds are no longer available. Please use the officially released version above. 
 
 ## Python Anaconda Distribution
 

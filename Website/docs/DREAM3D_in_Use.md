@@ -4,6 +4,27 @@ hide:
   - toc
 ---
 
+## IMPORTANT NOTE
+
+![DREAM3D-NX Logo](images/NX_Banner_Logo.png)
+
+DREAM.3D Version 6 is considered legacy and all development has stopped. Please consider using DREAM3D-NX which can be downloaded from [https://www.dream3d.io](https://www.dream3d.io). DREAM3D-NX offers a much better user experience with its [integrated visualization](https://www.dream3d.io/FeatureGallery/) among its new features.
+
+| Feature |  DREAM.3D v6  | DREAM3D-NX v7 |
+|------------|---------|------------|
+| Integrated Visualization | NO  |   YES |
+| Actively Developed | NO  |   YES |
+| Actively Supported | NO  |   YES |
+| Easy Python Bindings | NO  |   YES |
+| Crash Protection | NO  |   YES |
+| New features being added | NO  |   YES |
+
+<div class="grid cards" markdown>
+
+- :octicons-arrow-right-24:{ .lg .middle } [Go Checkout DREAM3D-NX](https://www.dream3d.io)
+
+</div>
+
 ## Papers Citing DREAM3D ##
 
 [1](http://stacks.iop.org/0965-0393/20/i=7/a=075005) S D Sintay and A D Rollett. Testing the accuracy of microstructure reconstruction in three dimensions using phantoms. Modelling and Simulation in Materials Science and Engineering, 20(7):075005, 2012. 

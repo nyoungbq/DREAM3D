@@ -4,13 +4,21 @@ hide:
   - toc
 ---
 
-# DREAM3D-NX: The Next Generation of DREAM.3D
+![DREAM3D-NX Logo](images/NX_Banner_Logo.png)
 
-BlueQuartz Software has officially released the next version of DREAM.3D, **DREAM3D-NX**. This version is completely rewritten from the ground up using modern C++ and Python coding standards, has integrated visualization, contains complete filter unit testing coverage and a fresh brand new interface that is still familiar to previous users. You can check out the full release notes and download your trial version at [https://www.dream3d.io](https://www.dream3d.io). Please contact **dream3d@bluequartz.net** for more information to obtain a license to the full verison of DREAM3D-NX.
+DREAM.3D Version 6 is considered legacy and all development has stopped. Please consider using DREAM3D-NX which can be downloaded from [https://www.dream3d.io](https://www.dream3d.io). DREAM3D-NX offers a much better user experience with its [integrated visualization](https://www.dream3d.io/FeatureGallery/) among its new features.
 
-## DREAM3D-NX Screenshots (Version 7.0.0'ish)
+| Feature |  DREAM.3D v6  | DREAM3D-NX v7 |
+|------------|---------|------------|
+| Integrated Visualization | NO  |   YES |
+| Actively Developed | NO  |   YES |
+| Actively Supported | NO  |   YES |
+| Easy Python Bindings | NO  |   YES |
+| Crash Protection | NO  |   YES |
+| New features being added | NO  |   YES |
 
-| Version | |
-|--|--|
-| Free | ![](images/NX_Overview_Free.png) |
-| Commercial | ![](images/NX_Overview_Commercial.png) |
+<div class="grid cards" markdown>
+
+- :octicons-arrow-right-24:{ .lg .middle } [Go Checkout DREAM3D-NX](https://www.dream3d.io)
+
+</div>
