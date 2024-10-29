@@ -489,7 +489,7 @@ protected:
     for(size_t i = 0; i < phases.size(); i++)
     {
       int32_t phaseID = phases[i]->getPhaseIndex();
-      crystalStructures->setValue(phaseID, phases[i]->determineLaueGroup());
+      crystalStructures->setValue(phaseID, phases[i]->determineOrientationOpsIndex());
       materialNames->setValue(phaseID, S2Q(phases[i]->getMaterialName()));
       std::vector<float> lc = phases[i]->getLatticeConstants();
 

@@ -445,7 +445,7 @@ int32_t ReadCtfData::loadMaterialInfo(CtfReader* reader)
   for(const auto& phase : phases)
   {
     int32_t phaseID = phase->getPhaseIndex();
-    crystalStructures->setValue(phaseID, phase->determineLaueGroup());
+    crystalStructures->setValue(phaseID, phase->determineOrientationOpsIndex());
     materialNames->setValue(phaseID, S2Q(phase->getMaterialName()));
     std::vector<float> lc = phase->getLatticeConstants();
 

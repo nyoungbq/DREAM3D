@@ -578,7 +578,7 @@ int32_t ImportH5EspritData::loadMaterialInfo(EbsdReader* ebsdReader)
   // for(size_t i = 0; i < phases.size(); i++)
   {
     int32_t phaseID = phase->getPhaseIndex();
-    crystalStructures->setValue(phaseID, phase->determineLaueGroup());
+    crystalStructures->setValue(phaseID, phase->determineOrientationOpsIndex());
     materialNames->setValue(phaseID, S2Q(phase->getMaterialName()));
     std::vector<float> lc = phase->getLatticeConstants();
 
