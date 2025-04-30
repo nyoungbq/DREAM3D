@@ -629,7 +629,7 @@ void InitParameterTypeMapping()
   s_ParameterTypeMapping["MultiDataArraySelectionFilterParameter"] = "MultiArraySelectionParameter::ValueType";
   s_ParameterTypeMapping["LinkedBooleanFilterParameter"] = "bool";
   s_ParameterTypeMapping["LinkedChoicesFilterParameter"] = "ChoicesParameter::ValueType";
-  s_ParameterTypeMapping["PreflightUpdatedValueFilterParameter"] = "<<<NOT_IMPLEMENTED>>>";
+  s_ParameterTypeMapping["PreflightUpdatedValueFilterParameter"] = "<<<PreflightUpdatedValueFilterParameter NOT_IMPLEMENTED>>>";
 
   // No COMPLEX Type Yet
   s_ParameterTypeMapping["CalculatorFilterParameter"] = "<<<NOT_IMPLEMENTED>>>";
@@ -824,7 +824,7 @@ void InitIncludeMapping()
   s_InlcudeMapping["DataArraySelectionFilterParameter"] = "ArraySelectionParameter";
   s_InlcudeMapping["ChoiceFilterParameter"] = "ChoicesParameter";
   s_InlcudeMapping["AttributeMatrixCreationFilterParameter"] = "DataGroupCreationParameter";
-  s_InlcudeMapping["AttributeMatrixSelectionFilterParameter"] = "DataGroupSelectionParameter";
+  s_InlcudeMapping["AttributeMatrixSelectionFilterParameter"] = "AttributeMatrixSelectionParameter";
   s_InlcudeMapping["DataContainerCreationFilterParameter"] = "DataGroupCreationParameter";
   s_InlcudeMapping["DataContainerSelectionFilterParameter"] = "DataGroupSelectionParameter";
   s_InlcudeMapping["InputFileFilterParameter"] = "FileSystemPathParameter";

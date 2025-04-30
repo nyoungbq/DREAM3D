@@ -20,9 +20,8 @@ struct @PLUGIN_NAME_UPPER@_EXPORT @FILTER_NAME@InputValues
 };
 
 /**
- * @class ConditionalSetValue
- * @brief This filter replaces values in the target array with a user specified value
- * where a bool mask array specifies.
+ * @class @FILTER_NAME@
+ * @brief This algorithm implements support code for the @FILTER_NAME@Filter
  */
 
 class @PLUGIN_NAME_UPPER@_EXPORT @FILTER_NAME@

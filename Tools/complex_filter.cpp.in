@@ -43,6 +43,8 @@ std::vector<std::string> @FILTER_NAME@::defaultTags() const
 Parameters @FILTER_NAME@::parameters() const
 {
   Parameters params;
+  // Create the parameter descriptors that are needed for this filter
+  params.insertSeparator(Parameters::Separator{"Input Parameter(s)"});
 
   /**
    * Please separate the parameters into groups generally of the following:
@@ -63,13 +65,20 @@ Parameters @FILTER_NAME@::parameters() const
 }
 
 //------------------------------------------------------------------------------
+IFilter::VersionType @FILTER_NAME@::parametersVersion() const
+{
+  return 1;
+}
+
+//------------------------------------------------------------------------------
 IFilter::UniquePointer @FILTER_NAME@::clone() const
 {
   return std::make_unique<@FILTER_NAME@>();
 }
 
 //------------------------------------------------------------------------------
-IFilter::PreflightResult @FILTER_NAME@::preflightImpl(const DataStructure& dataStructure, const Arguments& filterArgs, const MessageHandler& messageHandler, const std::atomic_bool& shouldCancel) const
+IFilter::PreflightResult @FILTER_NAME@::preflightImpl(const DataStructure& dataStructure, const Arguments& filterArgs, const MessageHandler& messageHandler,
+                                                               const std::atomic_bool& shouldCancel, const ExecutionContext& executionContext) const
 {
   /****************************************************************************
    * Write any preflight sanity checking codes in this function
@@ -124,7 +133,8 @@ IFilter::PreflightResult @FILTER_NAME@::preflightImpl(const DataStructure& dataS
 }
 
 //------------------------------------------------------------------------------
-Result<> @FILTER_NAME@::executeImpl(DataStructure& dataStructure, const Arguments& filterArgs, const PipelineFilter* pipelineNode, const MessageHandler& messageHandler, const std::atomic_bool& shouldCancel) const
+Result<> @FILTER_NAME@::executeImpl(DataStructure& dataStructure, const Arguments& filterArgs, const PipelineFilter* pipelineNode, const MessageHandler& messageHandler,
+                                             const std::atomic_bool& shouldCancel, const ExecutionContext& executionContext) const
 {
 
   @ALGORITHM_NAME@InputValues inputValues;
