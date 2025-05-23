@@ -16,6 +16,7 @@ DREAM.3D Version 6 is considered legacy and all development has stopped. Please 
 | Easy Python Bindings | NO  |   YES |
 | Crash Protection | NO  |   YES |
 | New features being added | NO  |   YES |
+| Synthetic Microstructure | YES |   NO  |
 
 <div class="grid cards" markdown>
 
