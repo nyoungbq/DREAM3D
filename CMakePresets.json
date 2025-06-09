@@ -1,0 +1,183 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 24,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "hidden":  true,
+      "displayName": "default configuration",
+      "description": "Build configuration for Azure Self Hosted",
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "CMAKE_BUILD_TYPE": {
+          "type": "STRING",
+          "value": "Release"
+        },
+        "SIMPL_USE_MULTITHREADED_ALGOS": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "SIMPL_USE_MKDOCS": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "SIMPL_RELATIVE_PATH_CHECK": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "SIMPL_WRAP_PYTHON": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "SIMPL_EMBED_PYTHON": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "SIMPL_ENABLE_ANACONDA_LOCAL_INSTALL": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "SIMPL_ENABLE_ANACONDA_PACKAGE": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "SIMPL_USE_QtWebEngine": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "SIMPL_BUILD_CLI_TOOLS": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "SIMPLView_USE_STYLESHEETEDITOR": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "SIMPLView_BUILD_DevHelper": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "SIMPL_BUILD_TESTING": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "SIMPLView_BUILD_CLI_TOOLS": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "DREAM3D_BUILD_VERSION_FILE": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "DREAM3D_BUILD_TEST_FILTERS": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "ITKImageProcessing_ENABLE_SCIFIO": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "DREAM3D_ANACONDA": {
+          "type": "BOOL",
+          "value": "OFF"
+        },
+        "pybind11_DIR": {
+          "type": "PATH",
+          "value": "E:/DREAM3D_SDK/pybind11-2.6.2/share/cmake/pybind11"
+        },
+        "discount_DIR": {
+          "type": "PATH",
+          "value": "E:/DREAM3D_SDK/discount-2.2.3/lib/cmake/discount"
+        },
+        "Eigen3_DIR": {
+          "type": "PATH",
+          "value": "E:/DREAM3D_SDK/Eigen-3.3.9/share/eigen3/cmake"
+        },
+        "HDF5_DIR": {
+          "type": "PATH",
+          "value": "E:/DREAM3D_SDK/hdf5-1.10.7/cmake/hdf5"
+        },
+        "TBB_DIR": {
+          "type": "PATH",
+          "value": "E:/DREAM3D_SDK/oneTBB-2021.4.0-Release/lib/cmake/TBB"
+        },
+        "libharu_DIR": {
+          "type": "PATH",
+          "value": "E:/DREAM3D_SDK/haru-2.0.0/cmake/libharu"
+        },
+        "nlohmann_json_DIR": {
+          "type": "PATH",
+          "value": "E:/DREAM3D_SDK/nlohmann_json-3.9.1/lib/cmake/nlohmann_json"
+        },
+        "ITK_DIR": {
+          "type": "PATH",
+          "value": "E:/DREAM3D_SDK/ITK-5.2.1"
+        },
+        "Qt5_DIR": {
+          "type": "PATH",
+          "value": "E:/NX_SDK/Qt/5.15.2/msvc2019_64/lib/cmake/Qt5"
+        },
+        "QWT_INSTALL": {
+          "type": "PATH",
+          "value": "E:/DREAM3D_SDK/qwt-6.1.5-5.15.2"
+        },
+        "DREAM3D_DATA_DIR": {
+          "type": "PATH",
+          "value": "${sourceDir}/../DREAM3D_Data"
+        },
+        "DREAM3D_EXTRA_PLUGINS": {
+          "type": "PATH",
+          "value": "ITKImageProcessing;SimulationIO;UCSBUtilities;DREAM3DReview"
+        }
+      }
+    },
+    {
+      "name": "d3d-ninja-v143-rel",
+      "displayName": "MSVC v143 Release",
+      "description": "Build configuration DREAM3D MSVC Ninja v143",
+      "generator": "Ninja",
+      "inherits": "default",
+      "binaryDir": "${sourceDir}/../DREAM3D-Builds/d3d-ninja-v143-rel",
+      "cacheVariables": {
+        "Python3_EXECUTABLE": {
+          "type": "PATH",
+          "value": "$env{ANACONDA_ROOT}/envs/dream3d/python.exe"
+        },
+        "MKDOCS_EXECUTABLE": {
+          "type": "PATH",
+          "value": "$env{ANACONDA_ROOT}/envs/dream3d/Scripts/mkdocs.exe"
+        },
+        "SPHINX_BUILD_EXECUTABLE": {
+          "type": "PATH",
+          "value": "$env{ANACONDA_ROOT}/envs/dream3d/Scripts/sphinx-build.exe"
+        },
+        "CMAKE_MAKE_PROGRAM": {
+          "type": "FILEPATH",
+          "value": "$env{NINJA_INSTALL}/ninja.exe"
+        },
+        "BrandedSIMPLView_DIR": {
+          "type": "PATH",
+          "value": "${sourceDir}/../BrandedDREAM3D"
+        }
+      },
+      "environment": {
+        "ANACONDA_ROOT": "C:/Applications/Anaconda3",
+        "NINJA_INSTALL": "C:/Applications/ninja-win"
+      }
+    }
+  ],
+  "buildPresets": [
+    
+  ],
+  "testPresets": [
+    
+  ]
+}
