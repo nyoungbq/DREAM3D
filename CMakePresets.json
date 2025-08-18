@@ -172,10 +172,160 @@
         "ANACONDA_ROOT": "C:/Applications/Anaconda3",
         "NINJA_INSTALL": "C:/Applications/ninja-win"
       }
+    },
+    {
+      "name": "D3D-Rel-Qt515",
+      "displayName": "MacOS DREAM.3D Release Build",
+      "description": "Release Build configuration DREAM3D Ninja Xcode",
+      "generator": "Ninja",
+      "inherits": "default",
+      "binaryDir": "${sourceDir}/../DREAM3D-Build/D3D-Rel-Qt515",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": {
+          "type": "STRING",
+          "value": "Release"
+        },
+        "Python3_EXECUTABLE": {
+          "type": "PATH",
+          "value": "$env{ANACONDA_ROOT}/envs/dream3d/bin/python"
+        },
+        "MKDOCS_EXECUTABLE": {
+          "type": "PATH",
+          "value": "$env{ANACONDA_ROOT}/envs/dream3d/bin/mkdocs"
+        },
+        "MKDOCS_PYTHON_EXECUTABLE": {
+          "type": "PATH",
+          "value": "$env{ANACONDA_ROOT}/envs/dream3d/bin/python"
+        },
+        "SPHINX_BUILD_EXECUTABLE": {
+          "type": "PATH",
+          "value": "$env{ANACONDA_ROOT}/envs/dream3d/bin/sphinx-build"
+        },
+        "CMAKE_MAKE_PROGRAM": {
+          "type": "FILEPATH",
+          "value": "$env{NINJA_INSTALL}/ninja"
+        },
+        "BrandedSIMPLView_DIR": {
+          "type": "PATH",
+          "value": "${sourceDir}/../BrandedDREAM3D"
+        },
+        "pybind11_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/pybind11-2.6.2/share/cmake/pybind11"
+        },
+        "discount_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/discount-2.2.3-Release/lib/cmake/discount"
+        },
+        "Eigen3_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/Eigen-3.3.9/share/eigen3/cmake"
+        },
+        "HDF5_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/hdf5-1.10.7-Release/cmake/hdf5"
+        },
+        "TBB_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/oneTBB-2021.4.0-Release/lib/cmake/TBB"
+        },
+        "libharu_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/haru-2.0.0-Release/cmake/libharu"
+        },
+        "nlohmann_json_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/nlohmann_json-3.9.1/lib/cmake/nlohmann_json"
+        },
+        "ITK_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/ITK-5.2.1-Release"
+        },
+        "Qt5_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/Qt5.15.2/5.15.2/clang_arm64/lib/cmake/Qt5"
+        },
+        "QWT_INSTALL": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/qwt-6.1.5-5.15.2"
+        }
+      },
+      "environment": {
+        "ANACONDA_ROOT": "/opt/local/anaconda3",
+        "NINJA_INSTALL": "/opt/local/bin"
+      }
+    },
+    {
+      "name": "D3D-Dbg-Qt515",
+      "displayName": "MacOS DREAM.3D Debug Build",
+      "description": "Debug Build configuration DREAM3D Ninja Xcode",
+      "generator": "Ninja",
+      "inherits": "D3D-Rel-Qt515",
+      "binaryDir": "${sourceDir}/../DREAM3D-Build/D3D-Dbg-Qt515",
+      "cacheVariables":
+      {
+        "CMAKE_BUILD_TYPE": {
+          "type": "STRING",
+          "value": "Debug"
+        },
+        "pybind11_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/pybind11-2.6.2/share/cmake/pybind11"
+        },
+        "discount_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/discount-2.2.3-Release/lib/cmake/discount"
+        },
+        "Eigen3_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/Eigen-3.3.9/share/eigen3/cmake"
+        },
+        "HDF5_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/hdf5-1.10.7-Release/cmake/hdf5"
+        },
+        "TBB_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/oneTBB-2021.4.0-Release/lib/cmake/TBB"
+        },
+        "libharu_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/haru-2.0.0-Release/cmake/libharu"
+        },
+        "nlohmann_json_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/nlohmann_json-3.9.1/lib/cmake/nlohmann_json"
+        },
+        "ITK_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/ITK-5.2.1-Release"
+        },
+        "Qt5_DIR": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/Qt5.15.2/5.15.2/clang_arm64/lib/cmake/Qt5"
+        },
+        "QWT_INSTALL": {
+          "type": "PATH",
+          "value": "/Users/Shared/DREAM3D_SDK/qwt-6.1.5-5.15.2"
+        }
+      }
     }
   ],
   "buildPresets": [
-    
+    {
+      "name": "D3D-Rel-Qt515 [BUILD]",
+      "displayName": "D3D-Rel-Qt515",
+      "description": "D3D-Rel-Qt515",
+      "configurePreset": "D3D-Rel-Qt515",
+      "configuration": "Release"
+    },
+    {
+      "name": "D3D-Dbg-Qt515 [BUILD]",
+      "displayName": "D3D-Dbg-Qt515",
+      "description": "D3D-Dbg-Qt515",
+      "configurePreset": "D3D-Dbg-Qt515",
+      "configuration": "Debug"
+    }
   ],
   "testPresets": [
     

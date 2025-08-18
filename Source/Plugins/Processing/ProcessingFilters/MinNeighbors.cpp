@@ -370,25 +370,66 @@ void MinNeighbors::assign_badpoints()
         }
       }
     }
+
     QString attrMatName = m_FeatureIdsArrayPath.getAttributeMatrixName();
     QList<QString> voxelArrayNames = m->getAttributeMatrix(attrMatName)->getAttributeArrayNames();
     for(const auto& dataArrayPath : m_IgnoredDataArrayPaths)
     {
       voxelArrayNames.removeAll(dataArrayPath.getDataArrayName());
     }
-    for(size_t j = 0; j < totalPoints; j++)
+
+    // Remove the Feature Ids from the list to update temporarily
+    voxelArrayNames.removeAll(m_FeatureIdsArrayPath.getDataArrayName());
     {
-      featurename = m_FeatureIds[j];
-      neighbor = m_Neighbors[j];
-      if(featurename < 0 && neighbor >= 0 && m_FeatureIds[neighbor] >= 0)
+      QString ss = QObject::tr("Voxels Updated: %1").arg(static_cast<int>(counter));
+      notifyStatusMessage(ss);
+    }
+
+    // Update all other Cell Level Arrays first
+    for(const auto& arrayName : voxelArrayNames)
+    {
+      int32_t counter = 0;
+      IDataArray::Pointer p = m->getAttributeMatrix(attrMatName)->getAttributeArray(arrayName);
+      for(size_t j = 0; j < totalPoints; j++)
       {
-        for(const auto& arrayName : voxelArrayNames)
+        featurename = m_FeatureIds[j];
+        neighbor = m_Neighbors[j];
+        if(featurename < 0 && neighbor >= 0 && m_FeatureIds[neighbor] >= 0)
         {
-          IDataArray::Pointer p = m->getAttributeMatrix(attrMatName)->getAttributeArray(arrayName);
           p->copyTuple(neighbor, j);
+          counter++;
         }
       }
+      // if(counter > 0)
+      // {
+      //   QString ss = QObject::tr("Updating Array: %1  Voxels Changed: %2").arg(arrayName).arg(counter);
+      //   notifyStatusMessage(ss);
+      // }
     }
+
+    // Now update the Feature Ids array
+    {
+      int32_t counter = 0;
+      // QString ss = QObject::tr("Updating Array: %1").arg(m_FeatureIdsArrayPath.getDataArrayName());
+      // notifyStatusMessage(ss);
+      IDataArray::Pointer p = m->getAttributeMatrix(attrMatName)->getAttributeArray(m_FeatureIdsArrayPath.getDataArrayName());
+      for(size_t j = 0; j < totalPoints; j++)
+      {
+        featurename = m_FeatureIds[j];
+        neighbor = m_Neighbors[j];
+        if(featurename < 0 && neighbor >= 0 && m_FeatureIds[neighbor] >= 0)
+        {
+          p->copyTuple(neighbor, j);
+          counter++;
+        }
+      }
+      // if(counter > 0)
+      // {
+      //   QString ss = QObject::tr("Updating Array: %1  Voxels Changed: %2").arg(m_FeatureIdsArrayPath.getDataArrayName()).arg(counter);
+      //   notifyStatusMessage(ss);
+      // }
+    }
+
   }
 }
 
