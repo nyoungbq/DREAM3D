@@ -74,18 +74,18 @@ void InitParameterTypeMapping()
 {
   s_ParameterTypeMapping["BooleanFilterParameter"] = QVariant(true);
   s_ParameterTypeMapping["DataArrayCreationFilterParameter"] = QVariant();
-  s_ParameterTypeMapping["DataArrayCreationFilterParameter"].setValue(DataArrayPath(QString("DataArray"), QString("Creation"), QString("Parameter")));
+  s_ParameterTypeMapping["DataArrayCreationFilterParameter"].setValue(DataArrayPath(QString("DC-A"), QString("AM-A"), QString("DA-A")));
   s_ParameterTypeMapping["DataArraySelectionFilterParameter"] = QVariant();
-  s_ParameterTypeMapping["DataArraySelectionFilterParameter"].setValue(DataArrayPath(QString("DataArray"), QString("Selection"), QString("Parameter")));
+  s_ParameterTypeMapping["DataArraySelectionFilterParameter"].setValue(DataArrayPath(QString("DC-B"), QString("AM-B"), QString("DA-B")));
   s_ParameterTypeMapping["ChoiceFilterParameter"] = QVariant(42);
   s_ParameterTypeMapping["AttributeMatrixCreationFilterParameter"] = QVariant();
-  s_ParameterTypeMapping["AttributeMatrixCreationFilterParameter"].setValue(DataArrayPath(QString("AttributeMatrix/CreationParameter")));
+  s_ParameterTypeMapping["AttributeMatrixCreationFilterParameter"].setValue(DataArrayPath(QString("DC-C|AM-C")));
   s_ParameterTypeMapping["AttributeMatrixSelectionFilterParameter"] = QVariant();
-  s_ParameterTypeMapping["AttributeMatrixSelectionFilterParameter"].setValue(DataArrayPath(QString("AttributeMatrix/SelectionParameter")));
+  s_ParameterTypeMapping["AttributeMatrixSelectionFilterParameter"].setValue(DataArrayPath(QString("DC-D|AM-D")));
   s_ParameterTypeMapping["DataContainerCreationFilterParameter"] = QVariant();
-  s_ParameterTypeMapping["DataContainerCreationFilterParameter"].setValue(DataArrayPath(QString("DataContainerCreationParameter")));
+  s_ParameterTypeMapping["DataContainerCreationFilterParameter"].setValue(DataArrayPath(QString("DC-E")));
   s_ParameterTypeMapping["DataContainerSelectionFilterParameter"] = QVariant();
-  s_ParameterTypeMapping["DataContainerSelectionFilterParameter"].setValue(DataArrayPath(QString("DataContainerSelectionParameter")));
+  s_ParameterTypeMapping["DataContainerSelectionFilterParameter"].setValue(DataArrayPath(QString("DC-F")));
   s_ParameterTypeMapping["InputFileFilterParameter"] = QVariant(QString("/Input/File/Filter/Parameter.txt"));
   s_ParameterTypeMapping["InputPathFilterParameter"] = QVariant(QString("/Input/Path/Filter/Parameter"));
   s_ParameterTypeMapping["OutputFileFilterParameter"] = QVariant(QString("/Output/File/Filter/Parameter.txt"));
@@ -111,25 +111,69 @@ void InitParameterTypeMapping()
   s_ParameterTypeMapping["StringFilterParameter"] = QVariant(QString("StringFilterParameter"));
   s_ParameterTypeMapping["SeparatorFilterParameter"] = QVariant(QString(""));
   s_ParameterTypeMapping["LinkedDataContainerSelectionFilterParameter"] = QVariant();
-  s_ParameterTypeMapping["LinkedDataContainerSelectionFilterParameter"].setValue(DataArrayPath(QString("LinkedDataContainerSelectionFilterParameter")));
+  s_ParameterTypeMapping["LinkedDataContainerSelectionFilterParameter"].setValue(DataArrayPath(QString("DC-G")));
   s_ParameterTypeMapping["LinkedPathCreationFilterParameter"] = QVariant(QString("LinkedPathCreationFilterParameter"));
   s_ParameterTypeMapping["MultiDataArraySelectionFilterParameter"] = QVariant();
-  s_ParameterTypeMapping["MultiDataArraySelectionFilterParameter"].setValue(std::vector<DataArrayPath>{DataArrayPath("Multi/Data/Array"), DataArrayPath("Selection/Filter/Parameter")});
+  s_ParameterTypeMapping["MultiDataArraySelectionFilterParameter"].setValue(std::vector<DataArrayPath>{DataArrayPath("DC-H|AM-E|DA-C"), DataArrayPath("DC-I|AM-F|DA-D")});
   s_ParameterTypeMapping["LinkedBooleanFilterParameter"] = QVariant(true);
   s_ParameterTypeMapping["LinkedChoicesFilterParameter"] = QVariant(1);
   s_ParameterTypeMapping["PreflightUpdatedValueFilterParameter"] = QVariant(QString("PreflightUpdatedValueFilterParameter"));
   s_ParameterTypeMapping["CalculatorFilterParameter"] = QVariant(QString("57+92"));
   s_ParameterTypeMapping["ComparisonSelectionAdvancedFilterParameter"] = QVariant();
   ComparisonInputsAdvanced compInputAdv = {};
-  compInputAdv.addInput(1, QString("ComparisonSelectionAdvancedFilterParameter"), 1, 3.76f);
+  compInputAdv.addInput(1, QString("DC-J|AM-G|DA-E"), 1, 3.76f);
   s_ParameterTypeMapping["ComparisonSelectionAdvancedFilterParameter"].setValue(compInputAdv);
   s_ParameterTypeMapping["ComparisonSelectionFilterParameter"] = QVariant();
   ComparisonInputs compInput = {};
-  compInput.addInput(QString("Comparison"), QString("Selection"), QString("FilterParameter"), 1, 84.301f);
+  compInput.addInput(QString("DC-K"), QString("AM-H"), QString("DA-F"), 1, 84.301f);
   s_ParameterTypeMapping["ComparisonSelectionFilterParameter"].setValue(compInput);
   s_ParameterTypeMapping["ConvertHexGridToSquareGridFilterParameter"] = "<<<NOT_IMPLEMENTED>>>";
-  s_ParameterTypeMapping["DataContainerArrayProxyFilterParameter"] = QVariant();
-  s_ParameterTypeMapping["DataContainerArrayProxyFilterParameter"].setValue(DataContainerArrayProxy());
+
+  {
+    DataContainerArrayProxy dcArrayProxy = {};
+    {
+      DataArrayProxy daProxy("DC-L|AM-I", "DA-G");
+
+      AttributeMatrixProxy amProxy = AttributeMatrixProxy("AM-I");
+      amProxy.insertDataArray("DA-G", daProxy);
+      amProxy.setAMType(AttributeMatrix::Type::Face);
+      amProxy.setFlag(3);
+      amProxy.setName("AM-I");
+
+      DataContainerProxy dcProxy = DataContainerProxy("DC-L");
+      dcProxy.insertAttributeMatrix("AM-I", amProxy);
+      dcProxy.setDCType(1);
+      dcProxy.setFlag(4);
+      dcProxy.setName("DC-L");
+
+      dcArrayProxy.insertDataContainer("DC-L", dcProxy);
+    }
+    {
+      AttributeMatrixProxy amProxy = AttributeMatrixProxy("AM-J");
+      amProxy.setAMType(AttributeMatrix::Type::Face);
+      amProxy.setFlag(3);
+      amProxy.setName("AM-J");
+
+      DataContainerProxy dcProxy = DataContainerProxy("DC-M");
+      dcProxy.insertAttributeMatrix("AM-J", amProxy);
+      dcProxy.setDCType(1);
+      dcProxy.setFlag(4);
+      dcProxy.setName("DC-M");
+
+      dcArrayProxy.insertDataContainer("DC-M", dcProxy);
+    }
+    {
+      DataContainerProxy dcProxy = DataContainerProxy("DC-N");
+      dcProxy.setDCType(1);
+      dcProxy.setFlag(4);
+      dcProxy.setName("DC-N");
+
+      dcArrayProxy.insertDataContainer("DC-N", dcProxy);
+    }
+
+    s_ParameterTypeMapping["DataContainerArrayProxyFilterParameter"] = QVariant();
+    s_ParameterTypeMapping["DataContainerArrayProxyFilterParameter"].setValue(dcArrayProxy);
+  }
   s_ParameterTypeMapping["DataContainerReaderFilterParameter"] = QVariant(QString("/DataContainer/Reader/Filter/Parameter.dream3d"));
   s_ParameterTypeMapping["DynamicChoiceFilterParameter"] = QVariant(QString("DynamicChoiceFilterParameter"));
   s_ParameterTypeMapping["DynamicTableFilterParameter"] = QVariant();
@@ -158,11 +202,11 @@ void InitParameterTypeMapping()
   s_ParameterTypeMapping["MontageSelectionFilterParameter"].setValue(MontageSelection(QString("prefix-"), QString("-suffix"), 2, 5, 7, 4, 9));
   s_ParameterTypeMapping["MontageStructureSelectionFilterParameter"] = QVariant(QString("MontageStructureSelectionFilterParameter"));
   s_ParameterTypeMapping["MultiAttributeMatrixSelectionFilterParameter"] = QVariant();
-  s_ParameterTypeMapping["MultiAttributeMatrixSelectionFilterParameter"].setValue(std::vector<DataArrayPath>{DataArrayPath("Multi/Attribute"),DataArrayPath("Matrix/Selection"), DataArrayPath("Filter/Parameter")});
+  s_ParameterTypeMapping["MultiAttributeMatrixSelectionFilterParameter"].setValue(std::vector<DataArrayPath>{DataArrayPath("DC-O|AM-K"),DataArrayPath("DC-P|AM-L"), DataArrayPath("DC-Q|AM-M")});
   s_ParameterTypeMapping["MultiDataContainerSelectionFilterParameter"] = QVariant();
-  s_ParameterTypeMapping["MultiDataContainerSelectionFilterParameter"].setValue(std::vector<QString>{QString("MultiDataContainer"), QString("SelectionFilterParameter")});
+  s_ParameterTypeMapping["MultiDataContainerSelectionFilterParameter"].setValue(std::vector<QString>{QString("DC-R"), QString("DC-S")});
   s_ParameterTypeMapping["MultiInputFileFilterParameter"] = "<<<NOT_IMPLEMENTED>>>";
-  s_ParameterTypeMapping["OEMEbsdScanSelectionFilterParameter"] = QVariant(QStringList{QString("OEMEbsd"),QString("ScanSelection"),QString("FilterParameter")});
+  s_ParameterTypeMapping["OEMEbsdScanSelectionFilterParameter"] = QVariant(QStringList{QString("Scan A"),QString("Scan B"),QString("Scan C")});
   s_ParameterTypeMapping["OrientationUtilityFilterParameter"] = QVariant(QString(""));
   s_ParameterTypeMapping["ParagraphFilterParameter"] = QVariant(QString("ParagraphFilterParameter"));
   s_ParameterTypeMapping["PhaseTypeSelectionFilterParameter"] = "<<<NOT_IMPLEMENTED>>>";
@@ -197,7 +241,8 @@ void GeneratePipeline(const QString& filePath)
         FilterParameterVectorType params = filter->getFilterParameters();
         for(const auto& param : params)
         {
-          param->setDefaultValue(s_ParameterTypeMapping[param->getNameOfClass()]);
+//          param->setDefaultValue(s_ParameterTypeMapping[param->getNameOfClass()]);
+          filter->setProperty(param->getPropertyName().toStdString().c_str(), s_ParameterTypeMapping[param->getNameOfClass()]);
         }
         pipeline->pushBack(filter);
       }
@@ -207,7 +252,6 @@ void GeneratePipeline(const QString& filePath)
 
   JsonFilterParametersWriter::Pointer jsonWriter = JsonFilterParametersWriter::New();
   jsonWriter->writePipelineToFile(pipeline, filePath, "CompatibilityTestPipeline", true);
-
 }
 
 // -----------------------------------------------------------------------------
