@@ -121,7 +121,9 @@ void InitParameterTypeMapping()
   s_ParameterTypeMapping["CalculatorFilterParameter"] = QVariant(QString("57+92"));
   s_ParameterTypeMapping["ComparisonSelectionAdvancedFilterParameter"] = QVariant();
   ComparisonInputsAdvanced compInputAdv = {};
-  compInputAdv.addInput(1, QString("DC-J|AM-G|DA-E"), 1, 3.76f);
+  compInputAdv.addInput(1, QString("DA-E"), 1, 3.76f);
+  compInputAdv.setDataContainerName("DC-J");
+  compInputAdv.setAttributeMatrixName("AM-G");
   s_ParameterTypeMapping["ComparisonSelectionAdvancedFilterParameter"].setValue(compInputAdv);
   s_ParameterTypeMapping["ComparisonSelectionFilterParameter"] = QVariant();
   ComparisonInputs compInput = {};
